@@ -1,0 +1,26 @@
+* {
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+#header-box {
+	background-color: lightgray;
+	padding: 30px;
+}
+
+
+#header-text {
+	padding-bottom: 10px;
+}
+
+h3 {
+	margin-top: 20px;
+}
+
+h4 {
+	margin-top: 50px;
+}
+
+#space {
+	margin: 100px;
+}
