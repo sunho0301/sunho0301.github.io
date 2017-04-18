@@ -5,16 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>INFO474 A1 - Sunho Kim</title>
+    <title>Technical Progress 2: D3</title>
 
     <!-- If you want to use a CSS framework, load it here (or in CSS) -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-    
     <!--Your stylesheet-->
     <link rel="stylesheet" href="css/main.css">
 
-    <!--Plotly CDN-->
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <!--D3 CDN-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.7.4/d3.min.js"></script>
 
     <!-- Load jQuery library -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -24,69 +22,21 @@
 </head>
 
 <body>
-
-    <header>
-        <div id="header-box", class="container-fluid">
-            <div class="container", id="header-text">
-                <h1>Analysis of Different Antibiotics</h1>
-                <h3><i>INFO 474 A1 - Sunho Kim</i></h3>
-            </div>
+    <!-- Create a header that describes the project -->
+    <div class="jumbotron container-fluid">
+        <div class="container">
+            <h1>Technical Progress 2: D3</h1>
+            <p>tp-2 | Data source from Airbnb, by way of <a href="http://databits.io/challenges/airbnb-user-pathways-challenge" target="_blank">Databits</a></p>
         </div>
-    </header>
+    </div>
 
-    <main class="container">
-        <h4>Dataset</h4>
-        <p>
-            In this page, we are going to look at 3 different visualizations to analyze 3 different antibiotics and 16 bacteria. 
-            The dataset has 16 observations. Each observation represents one bacteria with how much of antibiotics are required to inhibit the growth 
-            of the bacteria. More generally, the lower value of minimum inhibitory concentration indicates that antibiotic is more effective. 
-            Other than the minimum inhibitory concentration values for each antibiotic, an observation also contains whether the bacteria was stained.
-        </p>
-        <p>
-            With this dataset, we are going to find answers to 3 different questions:
-            <ol>
-                <li>Which antibiotic is most effective in general? <br>- In other words, which antibiotic requires the minimum amount to inhibit all 16 bacteria?</li>
-                <li>Can Gram Staining be an indicator for predicting amount of antibiotics needed to inhibit bacteria? <br>- In other words, are there any relationship between Gram Staining and amount of antibiotics used?</li>
-                <li>What is the general trend of amount of antibiotic required for each bacteria? <br>- In other words, show us the overview of all data.</li>
-            </ol>
-        </p>
-        <div id='space'></div>
-        <h4>1. Which antibiotic is most effective in general?</h4>
-        <div id="q1">
-        </div>
-        <p>
-            In this visualization, I used a stacked bar chart to show the <b>heights</b> of antiobiotics. Since the question focuses on the minimum amount required to inhibit all 16 bacteria, the comparison of the total amounts of antibiotics for inhibiting 16 bacteria is most efficient to convey the idea. In this case, we are looking at the shortest bar, and it clearly tells that streptomycin requires the least amount to inhibit all 16 bacteria saying it is the most effective in general.
-        </p>
-        <p>
-            Since penicilin includes extreme values around 800, I had to use <i>log</i> to scale so that we can compare it easier. Before I took log, it had a tall bar for penicilin which made it hard to see other bars at all. After taking log, I could fit 3 bars in the chart and compare their heights.
-        </p>
-        <p>
-            One could argue that scale of y-axis makes it confusing as they grow exponentially; however, we are trying to answer the question by comparing total heights of different antibiotics. It clearly shows differences in heights, so this visualization is doing its work.
-        </p>
+    <div class="container">
+        <h2>Bar chart</h2>
+        <p>Question: What are the most common devices/apps used by people who connect to Airbnb (between May 2014 and April 2015)?</p>
 
-        <div id='space'></div>
-        <h4>2. Can Gram Staining be an indicator for predicting amount of antibiotics needed to inhibit bacteria?</h4>
-        <div id="q2"></div>
-        <p>
-            In this visualization, I used scatter plot to show the <b>positions</b> of amount of antibiotics used. Also, I used <b>colors</b> to separate two different groups positive and negative. Since traffic signals use red for stop, people think red more negatively, and I chose red to represent negative and blue for positive.
-        </p>
-        <p>
-            This visualization's purpose is to provide easier understanding of the trends of amounts used based on the Gram Staining. As results, it needs to show how much of antibiotics are needed based on Gram Staining. This visualization clearly shows the general trend especially in Penicilin. If bacteria are Gram Staining positive, they tend to be treated with less amount of Penicilin, and we may predict generally. With the fact that we can generally predict amount of antibiotics may need, we can conclude that this visualization can be used to answer the question.
-        </P>
-
-        <div id='space'></div>
-        <h4>3. What is the general trend of amount of antibiotic required for each bacteria?</h4>
-        <div id='q3'></div>
-        <p>
-            This visualization allows us to have the overview of the dataset. Just like other visualizations, extremely large values were handled with log. The <b>grouped bar chart</b> allows us to see how different antibiotics are needed in each bacteria. This makes it easier to understand overall data because it is grouped by each row. It shows the overview, and answers the question.
-        </p>
-        <p>
-            Using <b>lengths</b> and <b>colors</b>, the visualization shows relevant data efficiently. If it used something like scatter plot, it would be harder to see markers as the same group. If the bars were not grouped together, it would be hard to keep track of each group either. Grouped bar chart works better than other visualization when providing the overview of the data.
-        </p>
-        <div id='space'></div>
-        <p>Thanks for reading</p>
-
-    </main>
+        <!--Create a svg with an id of viz-->
+        <svg id="viz"></svg>
+    </div>
 
 </body>
 
