@@ -1,31 +1,29 @@
-@import url(https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css);
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic);
+@import url(https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css);
 
-body {
-    font-family: "Open Sans", Helvetica, sans-serif;
-    font-weight: 300;
-    font-size: 16px;
-    height: 100%;
-    padding-bottom: 2em;
+.axis line, .axis path {
+  fill: none;
+  stroke: #000;
 }
 
-h1, h2, h3 {
-    font-weight: 300;
+.title {
+	text-anchor:middle;
 }
 
-.axis text {  
-    font-size: 10px;
+.node {
+  border: solid 1px white;
+  font: 10px sans-serif;
+  line-height: 12px;
+  overflow: hidden;
+  position: absolute;
+  text-indent: 2px;
+  color:white;
 }
 
-.axis-label {
-    font-size: 12px;
+#vis {
+  position:relative;
+  padding-bottom:100px;
 }
 
-.axis path {
-    fill: none;
-    stroke: #BBB;
-}
-
-.bar {
-    fill: #468966;
+.btn-group {
+  margin-bottom:20px;
 }
