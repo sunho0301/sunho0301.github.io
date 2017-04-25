@@ -4,13 +4,14 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>tp-3-hierarchy</title>
+    <title>A2 Data Exploration</title>
 
     <!-- Libraries -->
     <script src="https://code.jquery.com/jquery.min.js"></script>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script src="http://d3js.org/d3.v4.js"></script>
+    <script src="//d3js.org/d3.v3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.8.0/d3.min.js"></script>
 
     <!-- Custom files -->
     <link rel="stylesheet" href="css/main.css" />
@@ -20,20 +21,32 @@
 </head>
 
 <body class="container">
-    <h1>Technical progress 3</h1>
-    <p>Follow the instructions in the <code>README.md</code> file to turn the treemap below into a circle-pack layout.</p>
+    <h1>Understanding Requirements of Happiness</h1>
+    <p>People talk about requirements of hapiness. Some people think making more money makes us happier; some people say being healthy is the most important factor of the happiness; and some people say the freedom is the most basic and important factor of the happiness. With the visualization below, we will see the general effects of those three features. Which one is most relevant to the happiness? Do they even correlate? Let's find out.</p>
+    <ul>
+        <li>The same color of bars represent the same region</li>
+        <li>The countries are listed in order of happiness, the happiest being on the top</li>
+        <li>The numbers indicates specific indices of the categories(Happiness, GDP, Health, and Freedom)</li>
+        <li>The x-axis represents the magnitude of different indices and the y-axis represents countries.</li>
+    </ul>
     <div class="btn-group" data-toggle="buttons">
         <label class="btn btn-primary">
-				<input value="gdp" type="radio" name="options" id="option1" autocomplete="off">GDP Per Capita
+				<input value="Happiness" type="radio" name="options" id="option1" autocomplete="off">Happiness Score
 			</label>
         <label class="btn btn-primary">
-				<input value="life_expectancy" type="radio" name="options" id="option2" autocomplete="off" >Life Expectancy
+				<input value="GDP" type="radio" name="options" id="option2" autocomplete="off" >GDP Per Capita
 			</label>
         <label class="btn btn-primary active">
-				<input value="fertility_rate" type="radio" name="options" id="option2" autocomplete="off" checked>Fertility Rate
+				<input value="Health" type="radio" name="options" id="option3" autocomplete="off">Health
 			</label>
+        <label class="btn btn-primary active">
+                <input value="Freedom" type="radio" name="options" id="option4" autocomplete="off">Freedom
+            </label>
     </div>
     <div id="vis"></div>
+    <p>First, this visualization has a purpose which is to show relationships among happiness, GDP, health, and freedom. Through this visualization, we wish to understand more about happiness. This visualization enables the comparison between different regions, and in fact, shows there are some trends in regions. For example, people in European countries tend to be happier than the people in African countries. This visualization chose to use the horizontal bar chart because it can use its y-axis to fix the order of countries in terms of happiness. Happiest country gets located on the top. By doing so, we can compare other features like GDP and health easier. Also, locating the best on the top naturally convinces the audience. An example of it can be a situation gold medal gets located on the higher place during ceremony. Another way to visualize this could be grouped circles with various sizes; however, this dataset does not have a significant amount of differences in values, and comparing with areas would not be easy to compare. For example, similar ranks have .1 differences. Instead of using area, it used length starting from the same position. By doing so, it is easier to compare different values. This visualization uses buttons to control which data to compare. Since the order of happiness is fixed, we can easily compare the trend of different features regardless of whether the previous chart exists. While it does not harm the order which is the most important feature in this visualization, it gives a benefit of the clean visualization.</p>
+    <p>Using the controls, it provides good sources that users can answer following questions. First, Is GDP(or money) relevant to happiness? According to the visualization, there is a trend that countries with higher GDP are generally happier than countries with lower GDP. When we look more carefully, we can find out that the impact of GDP gets smaller as it goes up. We can interpret this as: more money does not guarantee happiness, but lack of money may cause unhappiness. The second question can be: does being healthy affects happiness? Just like GDP, health feature have a similar trend, and we can answer the question that health has some impact on happiness. This can also be interpreted as people are hard to be happy when they are physically in danger. The third question is: does freedom affects happiness? Freedom slightly follows the previous trends, but it has some inconsistent trends. One thing we can notice is that top 10 happiest countries' freedom index is quite even while other ranges of countries have inconsitent trends. What we can say here is that freedom may not be a good factor of happiness, but happiest contries ensures decent amount of freedom. Lastly, we can answer the question: which countries are happier than which countries?</p>
+    <p>Thank you for reading this.</p>
 </body>
 
 </html>

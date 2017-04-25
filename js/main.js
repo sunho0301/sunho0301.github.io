@@ -1,117 +1,120 @@
-/* Create a treemap of country level measures. Inspiration drawn from https://bl.ocks.org/mbostock/4063582.
- */
  
 $(function() {
-    // Read in your data. On success, run the rest of your code
-    d3.csv('data/prepped_data.csv', function(error, data) {
+    // Reads in  data. On success, runs the rest of the code
+    d3.csv('data/2016.csv', function(error, data) {
 
         // Setting defaults
         var margin = {
-                top: 40,
-                right: 10,
+                top: 15,
+                right: 30,
                 bottom: 10,
-                left: 10
+                left: 120
             },
-            width = 960,
-            height = 500,
+            width = 1000,
+            height = 2000,
             drawWidth = width - margin.left - margin.right,
             drawHeight = height - margin.top - margin.bottom,
-            measure = 'fertility_rate'; // variable to visualize
+            measure = 'Happiness'; // variable to visualize
 
-        // Append a wrapper div for the chart
-        var div = d3.select('#vis')
-            .append("div")
-            .attr('height', height)
-            .attr('width', width)
-            .style("left", margin.left + "px")
-            .style("top", margin.top + "px");
+        data = data.sort(function (a, b) {
+            return d3.ascending(a.Happiness, b.Happiness);
+        })
 
-
-        /* ********************************** Create hierarchical data structure  ********************************** */
-
-        var svg = div.append("svg")
-                    .attr('height', drawHeight)
-                    .attr('width', drawWidth);
-
-        var g = svg.append("g");
-
-        var diameter = +svg.attr("height");
-
-        // Nest your data *by region* using d3.nest()
-        var nestedData = d3.nest()
-            .key(function(d) {
-                return d.region;
-            })
-            .entries(data);
-
-
-        // Define a hierarchy for your data
-        var root = d3.hierarchy({
-            values: nestedData
-        }, function(d) {
-            return d.values;
-        }).sort(function(a, b) {
-            return b.value - a.value;
+        var regions = data.map(function(d) {
+            return d.Region;
         });
 
-        var pack = d3.pack()
-            .size([diameter, diameter]);
+        var colorScale = d3.scaleOrdinal().domain(regions).range(d3.schemeCategory20);
 
-        //console.log(pack);
 
-        /* ********************************** Create an ordinal color scale  ********************************** */
+            // Graph width and height - accounting for margins
+        var svg = d3.select("#vis").append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-        // Get list of regions for colors
-        var regions = nestedData.map(function(d) {
-            return d.key;
-        });
+        var x = d3.scaleLinear()
+            .range([0, width])
+            .domain([0, d3.max(data, function (d) {
+                return d[measure];
+            })]);
 
-        // Set an ordinal scale for colors
-        var colorScale = d3.scaleOrdinal().domain(regions).range(d3.schemeCategory10);
+        var y = d3.scaleBand()
+            .rangeRound([height, 0], .1)
+            .domain(data.map(function (d) {
+                return d.Country;
+            }));
 
-        /* ********************************** Write a function to perform the data-join  ********************************** */
+        var yAxis = d3.axisLeft()
+            .scale(y)
+            .tickSize(0);
 
-        // Write your `draw` function to bind data, and position elements
+        var xAxis = d3.axisTop()
+            .scale(x)
+            .tickSize(0);
+
+        var gy = svg.append("g")
+            .attr("class", "y axis")
+            .call(yAxis)
+
+        var gx = svg.append("g")
+            .attr("class", "x axis")
+            .call(xAxis)
+
+        var bars = svg.selectAll(".bar")
+            .data(data)
+            .enter()
+            .append("g")
+
+
         var draw = function() {
 
-            // Redefine which value you want to visualize in your data by using the `.sum()` method
-            root.sum(function(d) {
-                return +d[measure];
-            });
+            d3.selectAll(".bar").remove();
+            d3.selectAll(".label").remove();
 
-
-            pack(root);
-
-            // Bind your data to a selection of elements with class node
-            // The data that you want to join is array of elements returned by `root.leaves()`
-            var nodes = g.selectAll(".node").data(root.leaves());
-
-            // Enter and append elements, then position them using the appropriate *styles*
-            nodes.enter()
-                .append("circle")
-                .text(function(d) {
-                    return d.data.country_code;
+            bars.append("rect")
+                .attr("class", "bar")
+                .attr("y", function (d) {
+                    return y(d.Country);
                 })
-                .merge(nodes)
-                .attr('class', 'node')
-                .transition().duration(1500)
+                .transition()
+                .duration(750)
+                .attr("height", y.bandwidth()-5)
+                .attr("x", 0)
+                .attr("width", function (d) {
+                    return x(d[measure]);
+                })
                 .style("fill", function(d) {
-                    return colorScale(d.data.region);
+                    return colorScale(d.Region);
+                });
+                
+            bars.append("text")
+                .attr("class", "label")
+                //y position of the label is halfway down the bar
+                .attr("y", function (d) {
+                    return y(d.Country) + y.bandwidth() / 2 + 4;
                 })
-                .attr('cx', function(d) {return d.x;})
-                .attr('cy', function(d) {return d.y;})
-                .attr('r', function(d) {return d.r;});
-        };
+                .transition()
+                .duration(750)
+                //x position is 3 pixels to the right of the bar
+                .attr("x", function (d) {
+                    return x(d[measure]) + 3;
+                })
+                .text(function (d) {
+                    return d[measure];
+                });  
+ 
+            bars.exit().remove();
+  
+        }
 
-        // Call your draw function
         draw();
 
         // Listen to change events on the input elements
         $("input").on('change', function() {
             // Set your measure variable to the value (which is used in the draw funciton)
             measure = $(this).val();
-
-            // Draw your elements
             draw();
         });
     });
