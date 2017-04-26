@@ -54,6 +54,8 @@ $(function() {
             return b.value - a.value;
         });
 
+        console.log(root);
+
         var pack = d3.pack()
             .size([diameter, diameter]);
 

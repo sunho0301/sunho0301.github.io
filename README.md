@@ -1,10 +1,11 @@
 # tp3-hierarchy
 
 ========================   
-sunho0301.github.io  
-========================  
-  
-  
+
+[Click HERE](http://sunho0301.github.io)  
+
+========================    
+
 
 In this exercise, you'll follow the instructions below to transform a treemap into a circle-pack layout. This repository **already has** a working version of the treemap built. What you'll need to do is build a **circle-pack** layout instead. Your final product should look like this:
 
