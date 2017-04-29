@@ -1,58 +1,46 @@
-@import url(https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css);
+@import url(https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic);
+body {
+  font-family: "Open Sans", Helvetica, sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  height: 100%;
+  padding-bottom: 2em;
+}
 
-.axis line, .axis path {
+h1,
+h2,
+h3 {
+  font-weight: 300;
+}
+
+.axis text {
+  font-size: 12px;
+}
+
+.axis-label {
+  size: 12px;
+}
+
+.axis path {
   fill: none;
-  stroke: #000;
+  stroke: #BBB;
 }
 
-.title {
-	text-anchor:middle;
+#countrySelect {
+  overflow-y: scroll;
 }
 
-.node {
-  border: solid 1px white;
-  font: 10px sans-serif;
-  line-height: 12px;
-  overflow: hidden;
-  position: absolute;
-  text-indent: 2px;
-  color:white;
+.overlay {
+  fill: none;
+  pointer-events: all;
 }
 
-#vis {
-  position:relative;
-  padding-bottom:100px;
+circle,
+path {
+  pointer-events: none;
 }
 
-.btn-group {
-  margin-bottom:20px;
-}
-
-.d3-tip {
-  line-height: 1;
-  font-weight: bold;
-  padding: 12px;
-  background: rgba(0, 0, 0, 0.8);
-  color: #fff;
-  border-radius: 2px;
-}
-
-/* Creates a small triangle extender for the tooltip */
-.d3-tip:after {
-  box-sizing: border-box;
-  display: inline;
-  font-size: 10px;
-  width: 100%;
-  line-height: 1;
-  color: rgba(0, 0, 0, 0.8);
-  content: "\25BC";
-  position: absolute;
-  text-align: center;
-}
-
-/* Style northward tooltips differently */
-.d3-tip.n:after {
-  margin: -1px 0 0 0;
-  top: 100%;
-  left: 0;
+.hover-text {
+  text-shadow: 0 0 5px white, 0 0 5px white, 0 0 5px white, 0 0 5px white, 0 0 5px white, 0 0 5px white, 0 0 5px white, 0 0 5px white;
 }
